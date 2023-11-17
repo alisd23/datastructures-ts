@@ -1,0 +1,15 @@
+{
+  "name": "datastructures-ts",
+  "packageManager": "yarn@4.0.2",
+  "scripts": {
+    "lint": "prettier src",
+    "lint:fix": "prettier src --write",
+    "test": "vitest src",
+    "test:watch": "vitest src --watch"
+  },
+  "devDependencies": {
+    "prettier": "3.1.0",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
+  }
+}
