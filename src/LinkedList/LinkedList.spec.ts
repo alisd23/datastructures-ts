@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { SinglyLinkedList } from './SinglyLinkedList';
-import { DoubleLinkedList } from './DoublyLinkedList';
+import { DoublyLinkedList } from './DoublyLinkedList';
 
 describe('LinkedList', () => {
   function sharedLinkedListTests(
-    ListConstructor: typeof SinglyLinkedList | typeof DoubleLinkedList,
+    ListConstructor: typeof SinglyLinkedList | typeof DoublyLinkedList,
   ) {
     it('can create a linked list with no elements', () => {
       const list = new ListConstructor<number>();
@@ -442,6 +442,45 @@ describe('LinkedList', () => {
         expect(list.removeAt(1)).toBe(12);
         expect(list.length).toBe(2);
       });
+
+      // list.remove(element)
+      it('should throw error if element not found', () => {
+        const list = new ListConstructor<number>(10);
+        expect(() => list.remove(99)).toThrowError(RangeError);
+        expect(list.length).toBe(1);
+        expect(list.isEmpty).toBe(false);
+      });
+
+      it('can remove an element reference - single item', () => {
+        const list = new ListConstructor<number>(10);
+        expect(list.remove(10)).toBe(10);
+        expect(list.length).toBe(0);
+        expect(list.isEmpty).toBe(true);
+      });
+
+      it('can remove an element reference - start of list', () => {
+        const list = new ListConstructor<number>(1, 2, 3, 4);
+        expect(list.remove(1)).toBe(1);
+        expect(list.length).toBe(3);
+        expect(list.isEmpty).toBe(false);
+        expect(Array.from(list)).toEqual([2, 3, 4]);
+      });
+
+      it('can remove an element reference - middle of list', () => {
+        const list = new ListConstructor<number>(1, 2, 3, 4);
+        expect(list.remove(3)).toBe(3);
+        expect(list.length).toBe(3);
+        expect(list.isEmpty).toBe(false);
+        expect(Array.from(list)).toEqual([1, 2, 4]);
+      });
+
+      it('can remove an element reference - end of list', () => {
+        const list = new ListConstructor<number>(1, 2, 3, 4);
+        expect(list.remove(4)).toBe(4);
+        expect(list.length).toBe(3);
+        expect(list.isEmpty).toBe(false);
+        expect(Array.from(list)).toEqual([1, 2, 3]);
+      });
     });
 
     describe('Iterator', () => {
@@ -488,6 +527,6 @@ describe('LinkedList', () => {
   });
 
   describe('Doubly-linked List', () => {
-    sharedLinkedListTests(DoubleLinkedList);
+    sharedLinkedListTests(DoublyLinkedList);
   });
 });

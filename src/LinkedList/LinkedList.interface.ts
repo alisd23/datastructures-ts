@@ -70,6 +70,10 @@ export interface LinkedList<T> extends Iterable<T> {
    */
   removeAt(index: number): T;
   /**
+   * Remove the element provided (by referential equivalence)
+   */
+  remove(element: T): T;
+  /**
    * The iterator implementation for the list. The list can then be iterated over
    * with `for...of` etc.
    */

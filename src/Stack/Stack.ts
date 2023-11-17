@@ -1,4 +1,4 @@
-import { DoubleLinkedList } from './LinkedList/DoublyLinkedList';
+import { DoublyLinkedList } from '../LinkedList/DoublyLinkedList';
 
 /**
  * Stack data structure.
@@ -8,7 +8,7 @@ import { DoubleLinkedList } from './LinkedList/DoublyLinkedList';
  * - Peek: `O(1)`
  */
 export class Stack<T> implements Iterable<T> {
-  private list = new DoubleLinkedList<T>();
+  private list = new DoublyLinkedList<T>();
 
   public static fromArray<T>(items: T[]): Stack<T> {
     const stack = new Stack<T>();

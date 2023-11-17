@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Stack } from './Stack';
+import { Stack } from '../Stack/Stack';
 
 describe('Stack', () => {
   it('can initialise with an empty stack', () => {
@@ -7,6 +7,7 @@ describe('Stack', () => {
     expect(stack.size).toBe(0);
     expect(stack.isEmpty).toBe(true);
   });
+
   it('can initialise with a single element', () => {
     const stack = new Stack<number>(1);
     expect(stack.size).toBe(1);
@@ -138,7 +139,7 @@ describe('Stack', () => {
         expect(stack.isEmpty).toBe(false);
       });
 
-      it('can peek top of stack - multiple element', () => {
+      it('can peek top of stack - multiple elements', () => {
         const stack = Stack.fromArray([1, 2, 3]);
         expect(stack.peek()).toBe(3);
         // Check stack same size

@@ -6,3 +6,5 @@
 
 - Singly Linked List
 - Doubly Linked List (also exported as `LinkedList`)
+- Stack
+- Queue

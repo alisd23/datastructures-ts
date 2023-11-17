@@ -12,20 +12,20 @@ class DoublyLinkedNode<T> {
 /**
  * Double linked list.
  * Each node has a reference *both* to the next node and previous node in the list.
- * - Insert at head	`O(1)`
- * - Insert at tail	`O(1)`
- * - Remove at head	`O(1)`
- * - Remove at tail	`O(1)`
+ * - Insert at head	  `O(1)`
+ * - Insert at tail	  `O(1)`
+ * - Remove at head	  `O(1)`
+ * - Remove at tail	  `O(1)`
  * - Remove in middle	`O(n)`
- * - Search	`O(n)`
+ * - Search	          `O(n)`
  */
-export class DoubleLinkedList<T> implements LinkedList<T> {
+export class DoublyLinkedList<T> implements LinkedList<T> {
   private _head: Maybe<DoublyLinkedNode<T>> = null;
   private _tail: Maybe<DoublyLinkedNode<T>> = null;
   private _size = 0;
 
-  public static fromArray<T>(items: T[]): DoubleLinkedList<T> {
-    const list = new DoubleLinkedList<T>(...items);
+  public static fromArray<T>(items: T[]): DoublyLinkedList<T> {
+    const list = new DoublyLinkedList<T>(...items);
     return list;
   }
 
@@ -143,17 +143,7 @@ export class DoubleLinkedList<T> implements LinkedList<T> {
       throw new RangeError('List is empty');
     }
 
-    const toRemove = this._head;
-    this._head = toRemove.next;
-
-    if (this._head) {
-      this._head.previous = null;
-    } else {
-      this._tail = null;
-    }
-
-    this._size--;
-    return toRemove.value;
+    return this.removeNode(this._head);
   }
 
   public removeLast(): T {
@@ -161,16 +151,7 @@ export class DoubleLinkedList<T> implements LinkedList<T> {
       throw new RangeError('List is empty');
     }
 
-    const toRemove = this._tail;
-    this._tail = toRemove.previous;
-    if (this._tail) {
-      this._tail.next = null;
-    } else {
-      this._head = null;
-    }
-
-    this._size--;
-    return toRemove.value;
+    return this.removeNode(this._tail);
   }
 
   public removeAt(index: number): T {
@@ -180,19 +161,20 @@ export class DoubleLinkedList<T> implements LinkedList<T> {
       throw new RangeError(`No item at index ${index}`);
     }
 
-    if (toRemove.previous) {
-      toRemove.previous.next = toRemove.next;
-    } else {
-      this._head = toRemove.next;
-    }
-    if (toRemove.next) {
-      toRemove.next.previous = toRemove.previous;
-    } else {
-      this._tail = toRemove.previous;
+    return this.removeNode(toRemove);
+  }
+
+  public remove(element: T): T {
+    let node = this._head;
+
+    while (node) {
+      if (node.value === element) {
+        return this.removeNode(node);
+      }
+      node = node.next;
     }
 
-    this._size--;
-    return toRemove.value;
+    throw new RangeError('No element found');
   }
 
   public toString(): string {
@@ -230,5 +212,21 @@ export class DoubleLinkedList<T> implements LinkedList<T> {
     }
 
     return node;
+  }
+
+  private removeNode(toRemove: DoublyLinkedNode<T>): T {
+    if (toRemove.previous) {
+      toRemove.previous.next = toRemove.next;
+    } else {
+      this._head = toRemove.next;
+    }
+    if (toRemove.next) {
+      toRemove.next.previous = toRemove.previous;
+    } else {
+      this._tail = toRemove.previous;
+    }
+
+    this._size--;
+    return toRemove.value;
   }
 }

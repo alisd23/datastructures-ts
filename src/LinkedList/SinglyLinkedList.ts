@@ -11,12 +11,12 @@ class SinglyLinkedNode<T> {
 /**
  * Singly linked list.
  * Each node has a reference *only* to the next node in the list.
- * - Insert at head	`O(1)`
- * - Insert at tail	`O(n)`
- * - Remove at head	`O(1)`
- * - Remove at tail	`O(n)`
+ * - Insert at head	  `O(1)`
+ * - Insert at tail	  `O(n)`
+ * - Remove at head	  `O(1)`
+ * - Remove at tail	  `O(n)`
  * - Remove in middle	`O(n)`
- * - Search	`O(n)`
+ * - Search	          `O(n)`
  */
 export class SinglyLinkedList<T> implements LinkedList<T> {
   private _head: Maybe<SinglyLinkedNode<T>> = null;
@@ -121,10 +121,7 @@ export class SinglyLinkedList<T> implements LinkedList<T> {
       throw new RangeError(`No item at index 0`);
     }
 
-    const toRemove = this._head;
-    this._head = toRemove.next;
-    this._size--;
-    return toRemove.value;
+    return this.removeNode(this._head, null);
   }
 
   public removeLast(): T {
@@ -132,20 +129,36 @@ export class SinglyLinkedList<T> implements LinkedList<T> {
   }
 
   public removeAt(index: number): T {
-    if (index === 0) {
-      return this.removeFirst();
+    let previous: Maybe<SinglyLinkedNode<T>> = null;
+    let current = this._head;
+    let pointer = 0;
+
+    while (current && pointer < index) {
+      pointer++;
+      previous = current;
+      current = current.next;
     }
 
-    const nodeBefore = this.peekNodeAt(index - 1);
-    const toRemove = nodeBefore?.next;
-
-    if (!nodeBefore || !toRemove) {
+    if (!current) {
       throw new RangeError(`No item at index ${index}`);
     }
 
-    nodeBefore.next = toRemove.next;
-    this._size--;
-    return toRemove.value;
+    return this.removeNode(current, previous);
+  }
+
+  public remove(toRemove: T): T {
+    let previous: Maybe<SinglyLinkedNode<T>> = null;
+    let current = this._head;
+
+    while (current) {
+      if (current.value === toRemove) {
+        return this.removeNode(current, previous);
+      }
+      previous = current;
+      current = current.next;
+    }
+
+    throw new RangeError('No element found');
   }
 
   public toString(): string {
@@ -183,5 +196,19 @@ export class SinglyLinkedList<T> implements LinkedList<T> {
     }
 
     return node;
+  }
+
+  private removeNode(
+    toRemove: SinglyLinkedNode<T>,
+    previous: Maybe<SinglyLinkedNode<T>>,
+  ): T {
+    if (!previous) {
+      this._head = toRemove.next;
+    } else {
+      previous.next = toRemove.next;
+    }
+
+    this._size--;
+    return toRemove.value;
   }
 }
