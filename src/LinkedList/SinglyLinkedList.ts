@@ -1,5 +1,5 @@
 import { Maybe } from '../helpers/helper.types';
-import { LinkedList } from './LinkedList';
+import { LinkedList } from './LinkedList.interface';
 
 class SinglyLinkedNode<T> {
   public constructor(
@@ -131,15 +131,6 @@ export class SinglyLinkedList<T> implements LinkedList<T> {
     return this.removeAt(this._size - 1);
   }
 
-  *[Symbol.iterator](): IterableIterator<T> {
-    let node = this._head;
-
-    while (node !== null) {
-      yield node.value;
-      node = node.next;
-    }
-  }
-
   public removeAt(index: number): T {
     if (index === 0) {
       return this.removeFirst();
@@ -155,6 +146,20 @@ export class SinglyLinkedList<T> implements LinkedList<T> {
     nodeBefore.next = toRemove.next;
     this._size--;
     return toRemove.value;
+  }
+
+  public toString(): string {
+    const array = Array.from(this);
+    return array.toString();
+  }
+
+  public *[Symbol.iterator](): IterableIterator<T> {
+    let node = this._head;
+
+    while (node !== null) {
+      yield node.value;
+      node = node.next;
+    }
   }
 
   //======================//

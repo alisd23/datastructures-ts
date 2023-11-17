@@ -2,7 +2,7 @@
  * Common interface for a LinkedList to be implemented concretely by
  * singly or doubly-linked list implementations.
  */
-export interface LinkedList<T> {
+export interface LinkedList<T> extends Iterable<T> {
   /**
    * Get the number of items in the list
    */

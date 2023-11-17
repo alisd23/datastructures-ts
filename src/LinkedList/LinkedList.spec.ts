@@ -457,11 +457,28 @@ describe('LinkedList', () => {
         }
       });
 
-      it('can spread as any arrary', () => {
+      it('can spread as an array', () => {
         const array = [1, 2, 3, 4];
         const list = ListConstructor.fromArray(array);
         expect(list.length).toBe(4);
         expect([...list]).toEqual(array);
+      });
+    });
+
+    describe('To string', () => {
+      it('should display list like array - empty list', () => {
+        const list = new ListConstructor<number>();
+        expect(list.toString()).toBe('');
+      });
+
+      it('should display list like array - numbers', () => {
+        const list = new ListConstructor<number>(1, 2, 3);
+        expect(list.toString()).toBe('1,2,3');
+      });
+
+      it('should display list like array - strings', () => {
+        const list = new ListConstructor<string>('1', '2', '3');
+        expect(list.toString()).toBe('1,2,3');
       });
     });
   }

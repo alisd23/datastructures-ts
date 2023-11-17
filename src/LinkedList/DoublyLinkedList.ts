@@ -1,5 +1,5 @@
 import { Maybe } from '../helpers/helper.types';
-import { LinkedList } from './LinkedList';
+import { LinkedList } from './LinkedList.interface';
 
 class DoublyLinkedNode<T> {
   public constructor(
@@ -195,7 +195,12 @@ export class DoubleLinkedList<T> implements LinkedList<T> {
     return toRemove.value;
   }
 
-  *[Symbol.iterator](): IterableIterator<T> {
+  public toString(): string {
+    const array = Array.from(this);
+    return array.toString();
+  }
+
+  public *[Symbol.iterator](): IterableIterator<T> {
     let node = this._head;
 
     while (node !== null) {
