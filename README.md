@@ -8,3 +8,4 @@
 - Doubly Linked List (also exported as `LinkedList`)
 - Stack
 - Queue
+- Binary Heap (Priority queue)

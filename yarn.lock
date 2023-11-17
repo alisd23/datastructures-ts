@@ -159,6 +159,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@faker-js/faker@npm:^8.3.1":
+  version: 8.3.1
+  resolution: "@faker-js/faker@npm:8.3.1"
+  checksum: ed50c27a5674a8c755574ccc0c79c29fa70cd17d524b701269f584d2f78720c690da219f6111b0e743a4f6570fb08685d826b2d9e80ca9c1484b8c26047864c6
+  languageName: node
+  linkType: hard
+
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -585,6 +592,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "datastructures-ts@workspace:."
   dependencies:
+    "@faker-js/faker": "npm:^8.3.1"
     prettier: "npm:3.1.0"
     typescript: "npm:^5.2.2"
     vitest: "npm:^0.34.6"

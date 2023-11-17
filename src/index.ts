@@ -5,5 +5,5 @@ export { DoublyLinkedList as DoubleLinkedList } from './LinkedList/DoublyLinkedL
 export { DoublyLinkedList as LinkedList } from './LinkedList/DoublyLinkedList';
 
 export { Stack } from './Stack/Stack';
-
 export { Queue } from './Queue/Queue';
+export { BinaryHeap } from './Heap/BinaryHeap';

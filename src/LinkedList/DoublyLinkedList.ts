@@ -1,4 +1,4 @@
-import { Maybe } from '../helpers/helper.types';
+import { Maybe } from '../util/helper.types';
 import { LinkedList } from './LinkedList.interface';
 
 class DoublyLinkedNode<T> {
