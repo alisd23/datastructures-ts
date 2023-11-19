@@ -11,3 +11,4 @@ Repository of key data structures implemented in TypeScript. Used for educationa
 - Stack
 - Queue
 - Binary Heap (Priority queue)
+- Binary Search Tree
