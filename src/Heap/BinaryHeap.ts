@@ -1,3 +1,4 @@
+import { Comparator } from '../util/comparable';
 import { exists } from '../util/exists';
 import { Maybe } from '../util/helper.types';
 
@@ -246,7 +247,3 @@ export class BinaryHeap<T> {
     this.swap(index, this.size - 1);
   }
 }
-
-export type CompareResult = -1 | 0 | 1;
-
-export type Comparator<T> = (lhs: T, rhs: T) => CompareResult;

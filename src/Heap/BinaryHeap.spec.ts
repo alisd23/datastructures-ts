@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { BinaryHeap, Comparator } from './BinaryHeap';
+import { BinaryHeap } from './BinaryHeap';
 import { faker } from '@faker-js/faker';
+import { Comparator } from '../util/comparable';
 
 describe('Binary Heap', () => {
   function expectPoll(heap: BinaryHeap<number>, values: number[]) {
